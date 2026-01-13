@@ -18,11 +18,13 @@ for(let i = 1;i<lines.length;i++){
     })
 
     obj.Amount = Number(obj.Amount);
+    obj.Date = new Date(obj.Date);
     transaction.push(obj);
 
-    obj.Date = new Date(obj.Date);
+    
 }
+//sorting data by date 
+const sortDate = transaction.sort((a,b) => a.Date.getTime()-b.Date.getTime());
 
-const sortDate = transaction.sort((a,b) => a.date.getTime()-b.date.getTime());
+console.log(sortDate);
 
-console.log(sortData);
