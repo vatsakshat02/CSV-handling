@@ -26,5 +26,23 @@ for(let i = 1;i<lines.length;i++){
 //sorting data by date 
 const sortDate = transaction.sort((a,b) => a.Date.getTime()-b.Date.getTime());
 
-console.log(sortDate);
+// console.log(sortDate);
 
+function totalCredit(trans){
+        const summary  = {};
+        for(const txn of trans){
+            const name = txn.AccountHolder;
+            if(!summary[name]){
+                summary[name] = {AccountHolder: name, totalcredit: 0,totaldebit: 0}
+            }
+            if(txn.Type==='Credit'){
+                summary[name].totalcredit += txn.Amount;
+            }
+            else if(txn.Type==='Debit'){
+                summary[name].totaldebit += Math.abs(txn.Amount);
+            }
+        }
+        return Object.values(summary);
+}
+
+console.log(totalCredit(transaction))
